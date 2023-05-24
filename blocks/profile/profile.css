@@ -1,0 +1,10 @@
+.profile{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 36.25px;
+    margin-left: 200px;
+    margin-right: 200px;
+    max-width: 880px;
+    min-height: 120px;
+}

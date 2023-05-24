@@ -1,0 +1,11 @@
+.profile__button {
+    max-width: 150px;
+min-height: 50px;
+margin-left: 249px;
+margin-top: 35px;
+background-color: black;
+min-width: 153px;
+    padding: 0 0 0 0;
+    background-image: url(../../../images/AddButton.svg);
+    background-repeat: no-repeat;
+}
