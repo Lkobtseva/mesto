@@ -1,0 +1,13 @@
+.close-icon {
+    background-image: url(../../images/CloseIcon.svg);
+    min-width: 40px;
+    min-height: 40px;
+    background-repeat: no-repeat;
+    margin-bottom: 8px;
+    margin-left: 858px;
+    background-color: black;
+}
+
+.close-icon:hover{
+    opacity: 0.5;
+}

@@ -1,10 +1,9 @@
-.profile__subtitle{
-font-family: 'Inter';
+.popup__text {
+    font-family: 'Inter';
 font-style: normal;
 font-weight: 400;
 font-size: 18px;
 line-height: 22px;
-max-width: 336px;
-margin-top: 10px;
+text-align: center;
 color: #FFFFFF;
 }

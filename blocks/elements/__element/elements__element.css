@@ -1,6 +1,6 @@
 .elements__element{
 max-width: 282px;
-min-height: 361px;
-object-fit: cover;
-
+max-height: 361px;
+display: flex;
+    flex-direction: column;
 }

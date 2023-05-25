@@ -21,8 +21,30 @@
         <h2 class="profile__subtitle">Исследователь океана</h2>
         <button class="profile__editButton"></button>
         </div>
-     <button class="profile__button"></button>
-</section>
+        <button class="profile__button"></button>
+    </section>
+        
+        <div class="popup"> 
+            <button class="close-icon"></button>
+            <form class="popup__form">
+                <h3 class="popup__title">Редактировать профиль</h3>
+                <label class="label">
+                    <input  class="input" type="text" name="name">
+                    <p class="label__name">
+                        Ваше имя
+                    </p>
+                </label>
+                <label class="label">
+                    <input class="input" type="text" name="text">
+                    <p class="label__job">
+                        Описание
+                    </p>
+                </label>
+                <button class="popup__button" type="submit"><p class="popup__text">Сохранить</p></button>
+            </form>
+        </div>  
+
+     
 
 <section class="elements">
 <div class="elements__table">
@@ -77,10 +99,12 @@
 </section>
   </main>
 
-  <footer class="footer">
+  
+</body>
+<footer class="footer">
     <div class="footer__text">
         <p class="footer__line">© 2020 Mesto Russia</p>
     </div>
   </footer>
-</body>
+  <script src="script.js"></script>
 </html>
