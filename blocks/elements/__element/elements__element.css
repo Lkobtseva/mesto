@@ -4,3 +4,11 @@ max-height: 361px;
 display: flex;
     flex-direction: column;
 }
+
+@media screen and (max-width: 902px) {
+.elements__element{
+    width: 100%;
+}
+}
+
+

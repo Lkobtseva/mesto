@@ -1,0 +1,22 @@
+.popup__bg {
+    background-color: black;
+    opacity: 0.5;
+    background-size: cover;
+    margin-top: -300px;
+    padding-top: 195px;
+    padding-left: 425px;
+    padding-right: 425px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+@media screen and (max-width: 320px) {
+    .popup__bg {
+        margin-top: -100px;
+    padding-top: 80px;
+    padding-left: 19px;
+    padding-right: 19px;
+    }
+}

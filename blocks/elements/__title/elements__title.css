@@ -11,3 +11,10 @@ margin-top: 25px;
 margin-left: 21px;
 margin-bottom: 0;
 }
+
+@media screen and (max-width: 320px) {
+    .elements__title {
+        min-height: 23px;
+        max-width: 246px;
+    }
+}

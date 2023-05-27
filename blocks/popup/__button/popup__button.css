@@ -7,3 +7,11 @@ border-radius: 2px;
 margin-left: 36px;
 margin-right: 36px;
 }
+
+@media screen and (max-width: 320px) {
+    .popup__button{
+        margin-top: 18px;
+        max-width: 238px;
+        min-height: 46px;
+    }
+}

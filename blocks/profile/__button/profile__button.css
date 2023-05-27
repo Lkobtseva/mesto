@@ -1,7 +1,8 @@
 .profile__button {
     max-width: 150px;
-min-height: 50px;
-margin-left: 240px;
+min-height: 60px;
+margin-right: 0;
+margin-left: auto;
 margin-top: 35px;
 background-color: black;
 min-width: 153px;
@@ -11,4 +12,22 @@ min-width: 153px;
 }
 .profile__button:hover{
     opacity: 0.5;
+}
+
+@media screen and (max-width: 790px) { 
+    .profile__button{
+        margin-left: auto;
+        margin-right: auto;
+        min-width: 282px;
+        max-width: unset;
+    }
+}
+
+@media screen and (max-width: 340px) { 
+    .profile__button{
+    min-width: 200px;
+margin-left: 19px;
+margin-right: 19px;
+margin-top: px;
+    }
 }

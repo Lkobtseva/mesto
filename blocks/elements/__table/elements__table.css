@@ -7,3 +7,16 @@
     box-sizing: border-box;
     justify-items: stretch;
 }
+
+@media screen and (max-width: 902px) {
+.elements__table{
+margin-right: auto;
+    margin-left: auto;
+    max-width: 585px;
+}
+}
+
+@media screen and (max-width: 320px) {
+    .elements__table{
+grid-template-columns: repeat(auto-fit, minmax(261px, 1fr));
+    }}
