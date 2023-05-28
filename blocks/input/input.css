@@ -1,6 +1,14 @@
 .input {
-border: none;
-max-width: 358px;
-max-height: 27px;
-margin-bottom: 13px;
+    border: none;
+    max-width: 358px;
+    max-height: 27px;
+    min-width: 358px;
+    margin-bottom: 13px;
+}
+
+@media screen and (max-width: 500px) {
+    .input {
+        max-width: 210px;
+        min-width: unset;
+    }
 }

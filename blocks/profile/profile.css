@@ -1,5 +1,5 @@
-.profile{
-    display:flex;
+.profile {
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-top: 36.25px;
@@ -10,33 +10,33 @@
 }
 
 @media screen and (max-width: 1024px) {
-.profile{
-max-width: 760px;
-}
+    .profile {
+        max-width: 760px;
+    }
 }
 
 @media screen and (max-width: 795px) {
     .profile {
         max-width: 570px;
-    flex-direction: column;
+        flex-direction: column;
     }
 }
 
 @media screen and (max-width: 600px) {
     .profile {
-max-width: 450px;
-margin-left: 20px;
-    margin-right: 20px;
-    }}
+        max-width: 450px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
 
 @media screen and (max-width: 320px) {
-    .profile{
-    
-    margin-top: 38.25px;
-    margin-left: 19px;
-    margin-right: 19px;
-    max-width: 282px;
-    min-height: 286px;
+    .profile {
+        margin-top: 38.25px;
+        margin-left: 19px;
+        margin-right: 19px;
+        max-width: 282px;
+        min-height: 286px;
 
     }
 }
