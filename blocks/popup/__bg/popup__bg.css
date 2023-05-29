@@ -1,8 +1,9 @@
 .popup__bg {
     background: rgb(0, 0, 0, 0.5);
     background-size: cover;
-    margin-top: -370px;
+    
     padding-top: 300px;
+    margin-top: -370px;
     width: 100%;
     height: 100%;
     position: relative;
@@ -11,7 +12,7 @@
 
 @media screen and (max-width: 500px) {
     .popup__bg {
-        margin-top: -550px;
+        margin-top: -551px;
     }
 }
 
