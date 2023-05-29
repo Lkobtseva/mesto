@@ -19,14 +19,6 @@ let jobInput = document.querySelector('.jobinput');
 let editedName = document.querySelector('.profile__title');
 let editedJob = document.querySelector('.profile__subtitle');
 
-function formEdit(evt) {
-    evt.preventDefault();
-
-
-    nameInput.textContent = editedName;
-    jobInput.textContent = editedJob;
-}
-
 function handleFormSubmit(evt) {
     evt.preventDefault();
 
