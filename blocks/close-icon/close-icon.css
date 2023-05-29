@@ -4,7 +4,7 @@
     min-height: 40px;
     background-repeat: no-repeat;
     margin-bottom: 8px;
-    margin-left: 830px;
+    margin-left: 700px;
     background-color: black;
 }
 
@@ -12,9 +12,9 @@
     opacity: 0.5;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 500px) {
     .close-icon {
-        margin-left: 240px;
+        margin-left: 257px;
         width: 20px;
         height: 20px;
     }
