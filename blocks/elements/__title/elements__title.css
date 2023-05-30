@@ -7,15 +7,15 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    min-height: 79px;
+    min-height: 29px;
     margin-top: 25px;
     margin-left: 21px;
-    margin-bottom: 0;
+    margin-bottom: 31px;
 }
 
-@media screen and (max-width: 320px) {
+/*@media screen and (max-width: 320px) {
     .elements__title {
         min-height: 23px;
         max-width: 246px;
     }
-}
+}*/
