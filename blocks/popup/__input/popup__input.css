@@ -1,9 +1,13 @@
-.input {
+.popup__input {
     border: none;
     max-width: 358px;
     max-height: 27px;
     min-width: 358px;
     margin-bottom: 13px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
 }
 
 @media screen and (max-width: 500px) {

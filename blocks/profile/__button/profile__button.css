@@ -17,6 +17,7 @@
 
 .profile__button:hover {
     opacity: 0.6;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 795px) {
@@ -33,7 +34,7 @@
 @media screen and (max-width: 500px) {
     .profile__button {
         max-width: 282px;
-    min-width: 282px;
+        min-width: 282px;
         margin-top: 46px;
         transform: translate(0px, -83px);
     }

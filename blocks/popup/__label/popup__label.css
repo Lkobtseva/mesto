@@ -1,4 +1,4 @@
-.label {
+.popup__label {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     max-width: 358px;
     max-height: 27px;
@@ -8,4 +8,14 @@
     display: flex;
     align-items: center;
     justify-content: left;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+@media screen and (max-width: 500px) {
+    .popup__label {
+        margin-left: 19px;
+    }
 }

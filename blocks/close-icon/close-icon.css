@@ -1,22 +1,83 @@
 .close-icon {
     background-image: url(../../images/CloseIcon.svg);
-    min-width: 40px;
-    min-height: 40px;
+    width: 32px;
+    min-height: 32px;
+    /* background-size: 100px; */
+    /* transform: translate(826px, -8px); */
+    background-size: 100%;
     background-repeat: no-repeat;
-    margin-bottom: 8px;
-    margin-left: 700px;
+    /* margin-bottom: 8px; */
+    position: absolute;
+    /*right: 378px;*/
+    right:33%;
+    top: 156px;
     background-color: black;
+    border: none;
+    padding: 0, 0, 0, 0;
 }
+
 
 .close-icon:hover {
     opacity: 0.5;
+    cursor: pointer;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 1150px) {
     .close-icon {
-        
-        width: 20px;
-        height: 20px;
-        margin-left: 257px;
+right: 298px;
     }
 }
+
+@media screen and (max-width: 1000px) {
+    .close-icon {
+        right: 220px;
+    }}
+
+@media screen and (max-width: 900px) {
+    .close-icon {
+        right: 180px;
+    }}
+
+
+    @media screen and (max-width: 800px) {
+        .close-icon {
+            right: 140px;
+        }}
+
+        @media screen and (max-width: 700px) {
+            .close-icon {
+                right: 100px;
+            }}
+
+            @media screen and (max-width: 600px) {
+                .close-icon {
+                    right: 60px;
+                }}
+    
+@media screen and (max-width: 500px) {
+    .close-icon {
+        max-width: 20px;
+    max-height: 20px;
+    min-height: 20px;
+    right: 50px;
+    
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .close-icon {
+right:40px;
+
+    }}
+
+
+@media screen and (max-width: 320px) {
+    .close-icon {
+        right: 20px;
+        top: 83px;
+    }
+}
+    
+        
+    
+
