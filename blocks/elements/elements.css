@@ -13,8 +13,6 @@
 
 @media screen and (max-width: 902px) {
     .elements {
-        margin-left: 80px;
-        margin-right: 80px;
         margin-right: auto;
         margin-left: auto;
         max-width: 585px;
