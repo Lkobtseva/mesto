@@ -1,15 +1,5 @@
 .popup__container {
     background-size: cover;
-    transform: translate(0%, 0%);
-    padding-top: 195px;
-    width: 100%;
-    height: 100%;
     position: relative;
     z-index: 1;
-}
-
-@media screen and (max-width: 320px) {
-    .popup__container {
-        padding-top: 120px;
-    }
 }

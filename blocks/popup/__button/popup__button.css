@@ -9,6 +9,11 @@
     padding: 0 0 0 0;
     border: none;
     color: white;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
 }
 
 .popup__button:hover {
@@ -24,5 +29,7 @@
         margin-top: 10px;
         margin-left: 20px;
         margin-right: 20px;
+        font-size: 14px;
+        line-height: 17px;
     }
 }

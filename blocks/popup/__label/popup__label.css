@@ -5,13 +5,6 @@
     margin-bottom: 30px;
     margin-left: 36px;
     margin-right: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
 }
 
 @media screen and (max-width: 500px) {

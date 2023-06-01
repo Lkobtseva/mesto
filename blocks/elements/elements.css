@@ -3,12 +3,21 @@
     max-width: 880px;
     margin-left: auto;
     margin-right: auto;
+    display: grid;
+    row-gap: 20px;
+    column-gap: 17px;
+    grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+    box-sizing: border-box;
+    justify-items: stretch;
 }
 
 @media screen and (max-width: 902px) {
     .elements {
         margin-left: 80px;
         margin-right: 80px;
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 585px;
     }
 }
 
@@ -27,5 +36,6 @@
         margin-top: 36px;
         margin-left: 19px;
         margin-right: 19px;
+        grid-template-columns: repeat(auto-fit, minmax(261px, 1fr));
     }
 }
