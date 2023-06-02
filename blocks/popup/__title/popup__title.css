@@ -6,8 +6,8 @@
     color: #000000;
     margin-top: 34px;
     margin-left: 36px;
+    max-width: 310px;
     margin-right: auto;
-    margin-bottom: 50px;
     text-align: center;
 }
 
@@ -17,7 +17,8 @@
         line-height: 22px;
         margin-left: 22px;
         margin-top: 25px;
-        margin-bottom: 77px;
+        margin-bottom: 0px;
+        max-width: 238px;
     }
 
 }
