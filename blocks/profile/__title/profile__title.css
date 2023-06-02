@@ -27,17 +27,16 @@
         font-size: 27px;
         padding-left: 20px;
         line-height: 33px;
-}
     }
+}
 
 
 
 @media screen and (max-width: 320px) {
     .profile__title {
-        max-width: 210px;
-        max-width: 210px;
-    min-width: 198px;
-    margin-right: 0;
+        max-width: 200px;
+        min-width: 198px;
+        margin-right: 0px;
         margin-top: 6px;
     }
 }
