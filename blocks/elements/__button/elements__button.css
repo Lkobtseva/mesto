@@ -1,25 +1,25 @@
 .elements__button {
-    background-image: url(../../../images/heart.svg);
-    background-repeat: no-repeat;
-    height: 19px;
-    width: 25px;
-    margin-right: 20px;
-    margin-left: auto;
-    top: 32px;
-    position: relative;
-    border: none;
-    background-color: white;
-    z-index: 0;
-    max-height: 19px;
-    min-width: 25px;
+  background-image: url(../../../images/heart.svg);
+  background-repeat: no-repeat;
+  height: 19px;
+  width: 25px;
+  margin-right: 20px;
+  margin-left: auto;
+  top: 32px;
+  position: relative;
+  border: none;
+  background-color: white;
+  z-index: 0;
+  max-height: 19px;
+  min-width: 25px;
 }
 
 .elements__button:hover {
-    opacity: 0.5;
-    cursor: pointer;
+  opacity: 0.5;
+  cursor: pointer;
 }
 
 .elements__button:active {
-    background-image: url(../../../images/Union.svg);
-    opacity: 1;
+  background-image: url(../../../images/Union.svg);
+  opacity: 1;
 }

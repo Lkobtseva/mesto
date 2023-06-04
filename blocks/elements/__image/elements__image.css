@@ -1,14 +1,14 @@
 .elements__image {
-    max-width: 282px;
-    min-height: 282px;
-    margin-bottom: 0;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    object-fit: cover;
+  max-width: 282px;
+  min-height: 282px;
+  margin-bottom: 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  object-fit: cover;
 }
 
 @media screen and (max-width: 902px) {
-    .elements__image {
-        width: 100%;
-    }
+  .elements__image {
+    width: 100%;
+  }
 }
