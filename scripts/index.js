@@ -7,7 +7,6 @@ let jobInput = document.querySelector(".popup__input_type_job");
 let editedName = document.querySelector(".profile__title");
 let editedJob = document.querySelector(".profile__subtitle");
 
-
 openPopup.addEventListener("click", function () {
   popup.classList.add("popup_opened");
   nameInput.value = editedName.textContent;
@@ -56,51 +55,35 @@ function handleFormSubmit(evt) {
 }
 popupCard.addEventListener("submit", handleFormSubmit);
 
-//popup3
-/*const openPopupImage = document.querySelector(".card__image");
-const closePopupImage = document.querySelector(".close-icon_type_open-card");
-const popupImage = document.querySelector(".popup_type_open-card");
-let popupTitle = document.querySelector(".popup__image-title");
-let popupBg = document.querySelector(".popup__image");
-
-openPopupImage.addEventListener("click", function () {
-  popupImage.classList.add("popup_image-opened");
-  titleElement.value = popupTitle.textContent;
-  imageElement.value = popupBg.textContent;
-});
-
-closePopupImage.addEventListener("click", function () {
-  popupImage.classList.remove("popup_image-opened");
-});*/
 
 //cards
-
 const initialCards = [
   {
-    name: "Sunset",
-    link: "https://unsplash.com/photos/1z4yWg9lQlg",
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
   },
   {
-    name: "Library",
-    link: "https://unsplash.com/photos/Oaqk7qqNh_c",
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
   },
   {
-    name: "Golden hour",
-    link: "https://unsplash.com/photos/YBMZqq7GAjk",
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
   },
   {
-    name: "Picnic",
-    link: " ",
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
   },
   {
-    name: "Daisy wheels",
-    link: "https://unsplash.com/photos/AVi4lkHl5L4",
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
   },
   {
-    name: "Books",
-    link: "https://unsplash.com/photos/WUSp1l7_rQc",
-  },
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
 ];
+
 
 const formElement = document.querySelector(".popupform_type_new-card");
 const buttonSubmitElement = formElement.querySelector(".popup__buttonAddCard");
@@ -176,29 +159,76 @@ initialCards.forEach(function (item) {
   renderCard(item, cardListElement, "append");
 });
 
-/*function createCard(name, link) {
-  const template = document.querySelector("#card");
-  const card = template.content.cloneNode(true);
-  const image = card.querySelector(".card__image");
-  const title = card.querySelector(".card__title");
-  const button = card.querySelector(".card__button");
+//popup3
+const popupImage = document.querySelector(".popup_type_open-card");
+const openPopupImages = document.querySelectorAll(".card__image");
+const closePopupImage = document.querySelector(".close-icon_type_open-card");
+const ImageContainer = document.querySelector(".popup__image-container");
+const popupTitle = ImageContainer.querySelector(".popup__image-title");
+const popupBg = ImageContainer.querySelector(".popup__image");
+const titleElement = document.querySelector(".card__title");
+const imageElement = document.querySelector(".card__image");
+const cardList = document.querySelector('.cards__list');
 
-  image.src = link;
-  title.textContent = name;
+cardList.addEventListener("click", function(event) {
+  const target = event.target;
+  if (target.classList.contains("card__image")) {
+    const card = target.closest(".card");
+    const titleElement = card.querySelector(".card__title");
+    const imageElement = card.querySelector(".card__image");
+    popupImage.classList.add("popup_opened");
+    popupTitle.textContent = titleElement.textContent;
+    popupBg.src = imageElement.src;
+  }
+});
+
+
+
+/*function addPopupImage () {
+  openPopupImages.forEach(function(image){
+    image.addEventListener("click", function () {
+      popupImage.classList.add("popup_opened");
+      titleElement.value = popupTitle.textContent;
+      imageElement.src = popupBg.src;
+    });
+  });
+  }*/
   
-  function addLike() {}
-  button.addEventListener("click", addLike);
-  /*likebutton*/
-/* return card;
-}
+closePopupImage.addEventListener("click", function () {
+  popupImage.classList.remove("popup_opened");
+});
 
-function renderCards() {
-  const cardsSection = document.querySelector(".cards");
 
-  initialCards.forEach((cardData) => {
-    const card = createCard(cardData.name, cardData.link);
-    cardsSection.appendChild(card);
+
+
+
+
+
+
+
+
+
+
+/*const openPopupImage = document.querySelectorAll(".card__image");
+const closePopupImage = document.querySelector(".close-icon_type_open-card");
+const popupImage = document.querySelector(".popup_type_open-card");
+const ImageContainer = document.querySelector(".popup__image-container");
+const popupTitle = ImageContainer.querySelector(".popup__image-title");
+const popupBg = ImageContainer.querySelector(".popup__image");
+const textElement = document.querySelector(".card__text");
+const titleElement = textElement.querySelector(".card__title");
+const imageElement = document.querySelector(".card__image");
+
+function addPopupImage () {
+  openPopupImage.addEventListener("click", function () {
+    popupImage.classList.add("popup_opened");
+    titleElement.textContent = popupTitle.textContent;
+    imageElement.src = popupBg.src;
   });
 }
 
-renderCards();*/
+
+
+closePopupImage.addEventListener("click", function () {
+  popupImage.classList.remove("popup_opened");
+});*/
