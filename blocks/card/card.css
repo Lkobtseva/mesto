@@ -1,4 +1,4 @@
-.elements__element {
+.card {
   max-width: 282px;
   max-height: 361px;
   display: flex;
@@ -6,7 +6,7 @@
 }
 
 @media screen and (max-width: 902px) {
-  .elements__element {
+  .card {
     width: 100%;
   }
 }
