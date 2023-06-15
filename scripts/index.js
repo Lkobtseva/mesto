@@ -30,7 +30,7 @@ popup.addEventListener("submit", handleFormSubmitpopup);
 
 //popup2
 const openPopupCard = document.querySelector(".profile__button");
-const closePopupCard = document.querySelector(".close-icon_type_new-card");
+const closePopupCard = document.querySelector(".popup__close-icon_type_new-card");
 const popupCard = document.querySelector(".popup_type_new-card");
 
 openPopupCard.addEventListener("click", function () {
@@ -99,7 +99,7 @@ const initialCards = [
 ];
 
 
-const formElement = document.querySelector(".popupform_type_new-card");
+const formElement = document.querySelector(".popup__form_type_new-card");
 const buttonSubmitElement = formElement.querySelector(".popup__buttonAddCard");
 const inputTitleElement = formElement.querySelector(".popup__input_type_title");
 const inputLinkElement = formElement.querySelector(".popup__input_type_link");
@@ -183,7 +183,7 @@ initialCards.forEach(function (item) {
 //popup3
 const popupImage = document.querySelector(".popup_type_open-card");
 const openPopupImages = document.querySelectorAll(".card__image");
-const closePopupImage = document.querySelector(".close-icon_type_open-card");
+const closePopupImage = document.querySelector(".popup__close-icon_type_open-card");
 const ImageContainer = document.querySelector(".popup__image-container");
 const popupTitle = ImageContainer.querySelector(".popup__image-title");
 const popupBg = ImageContainer.querySelector(".popup__image");
