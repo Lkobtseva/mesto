@@ -7,7 +7,6 @@ const jobInput = document.querySelector(".popup__input_type_job");
 const editedName = document.querySelector(".profile__title");
 const editedJob = document.querySelector(".profile__subtitle");
 
-
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
@@ -33,7 +32,7 @@ function handleFormSubmitPopup(evt) {
   console.log(jobInput.value);
   editedName.textContent = nameInput.value;
   editedJob.textContent = jobInput.value;
-  profileForm.classList.remove("popup_opened");
+  closePopup(profileForm)
 }
 profileForm.addEventListener("submit", handleFormSubmitPopup);
 
@@ -50,7 +49,7 @@ cardCloseButton.addEventListener("click", function () {
   closePopup(cardPopup);
 });
 
-function handleFormSubmit(evt) {
+function handleCardFormSubmit(evt) {
   evt.preventDefault();
 
   console.log(inputTitleElement.value);
@@ -67,12 +66,8 @@ function handleFormSubmit(evt) {
 
   cardForm.reset();
   cardPopup.classList.remove("popup_opened");
-  inputTitleElement.value = "";
-  inputLinkElement.value = "";
 }
-
-cardPopup.addEventListener("submit", handleFormSubmit);
-
+cardPopup.addEventListener("submit", handleCardFormSubmit);
 
 //cards
 const initialCards = [
@@ -102,22 +97,12 @@ const initialCards = [
   }
 ];
 
-
 const cardForm = document.querySelector(".popup__form_type_new-card");
 const buttonSubmitElement = cardForm.querySelector(".popup__buttonAddCard");
 const inputTitleElement = cardForm.querySelector(".popup__input_type_title");
 const inputLinkElement = cardForm.querySelector(".popup__input_type_link");
 const cardListElement = document.querySelector(".cards__list");
 const templateElement = document.querySelector("#card__template").content.querySelector(".card");
-
-function handleSubmitAdd(e) {
-  e.preventDefault();
-  renderCard(
-    inputTitleElement.value,
-    inputLinkElement.value,
-    cardListElement, "prepend"
-  );
-}
 
 function createCard({ name, link }) {
   const cardElement = templateElement.cloneNode(true);
@@ -142,15 +127,7 @@ function createCard({ name, link }) {
     openPopup(imageForm);
     popupTitle.textContent = titleElement.textContent;
     popupBg.src = imageElement.src;
-  });
-
-  const imageFormOpenButtons = cardElement.querySelectorAll(".card__image");
-  imageFormOpenButtons.forEach(function (image) {
-    image.addEventListener("click", function () {
-      openPopup(imageForm);
-      titleElement.value = popupTitle.textContent;
-      imageElement.src = popupBg.src;
-    });
+    popupBg.alt = name;
   });
 
   return cardElement;
@@ -179,8 +156,6 @@ function renderCard(data, container, position = "append") {
 initialCards.forEach(function (item) {
   renderCard(item, cardListElement, "append");
 });
-
-
 
 //popup3
 const imageForm = document.querySelector(".popup_type_open-card");
