@@ -65,7 +65,7 @@ function handleCardFormSubmit(evt) {
   );
 
   cardForm.reset();
-  cardPopup.classList.remove("popup_opened");
+  closePopup(cardPopup);
 }
 cardPopup.addEventListener("submit", handleCardFormSubmit);
 
