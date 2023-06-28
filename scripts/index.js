@@ -3,7 +3,7 @@ const profileOpenButton = document.querySelector(".profile__edit-button");
 const profileCloseButton = document.querySelector(".popup__close-icon");
 const profileForm = document.querySelector(".popup_type_edit");
 const nameInput = document.querySelector(".popup__input_type_name");
-const jobInput = document.querySelector(".popup__input_type_job");
+const jobInput = document.querySelector(".popup__input_type_about");
 const editedName = document.querySelector(".profile__title");
 const editedJob = document.querySelector(".profile__subtitle");
 

@@ -46,11 +46,11 @@
             <h2 class="popup__title">Редактировать профиль</h2>
             <form class="popup__form" name="editor" novalidate>
                     <input class="popup__input popup__input_type_name" type="text" name="name" required minlength="2" maxlength="40"  placeholder="Ваше имя"/>
-                    <span id="name-error" class="error">Необходимо заполнить данное поле</span>
-                    <span id="name-lenght-error" class="error">Минимальное колличество символов: 2. Длина текста сейчас: 1 символ.</span>
-                    <input class="popup__input popup__input_type_job" type="text" name="about" required minlength="2" maxlength="200"  placeholder="О себе"/>
-                    <span id="about-error" class="error">Необходимо заполнить данное поле</span>
-                    <span id="about-lenght-error"  class="error">Минимальное колличество символов: 2. Длина текста сейчас: 1 символ.</span>
+                    <span id="name-error" class="error"></span>
+                    <span id="name-lenght-error" class="error"></span>
+                    <input class="popup__input popup__input_type_about" type="text" name="about" required minlength="2" maxlength="200"  placeholder="О себе"/>
+                    <span id="about-error" class="error"></span>
+                    <span id="about-lenght-error"  class="error"></span>
                 <button class="popup__button" type="submit">Сохранить</button>
             </form>
         </div>
@@ -61,14 +61,14 @@
             <button class="popup__close-icon popup__close-icon_type_new-card" type="button"></button>           
             <h2 class="popup__title">Новое место</h2>
             <form class="popup__form popup__form_type_new-card" name="addCard" novalidate>
-                    <input class="popup__input popup__input_type_title" type="text" name="title" minlength="2" maxlength="30"required
+                    <input class="popup__input popup__input_type_title" type="text" name="title" minlength="2" maxlength="30" required
                         placeholder="Название">
-                        <span id="text-error" class="error">Вы пропустили это поле.</span>
+                        <span id="text-error" class="error"></span>
                     <input class="popup__input popup__input_type_link" type="url" name="link" minlength="2" required
                         placeholder="Ссылка на картинку">
-                        <span id="link-error" class="error">Введите адрес сайта.</span>
-                        <span id="link-lenght-error" class="error">Минимальное колличество символов: 2. Длина текста сейчас: 1 символ.</span>
-                <button class="popup__button popup__buttonAddCard" type="submit">Сохранить</button>
+                        <span id="link-error" class="error"></span>
+                        <span id="link-lenght-error" class="error"></span>
+                <button class="popup__button" type="submit">Сохранить</button>
             </form>
         </div>
     </div>

@@ -1,91 +1,50 @@
-/*enableValidation({
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__button',
-    inactiveButtonClass: 'popup__button_disabled',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_visible'
-  }); 
+// Получаем элементы формы и кнопку сохранения
+const form = document.querySelector('.popup__form');
+const inputName = document.querySelector('.popupinput_type_name');
+const aboutInput = document.querySelector('.popupinput_type_about');
+const saveButton = document.querySelector('.popup__button');
 
-
-  const profileForm = document.forms.editor;
-  const cardForm = document.forms.addCard;
-  const name = form.elements.name;
-  const about = form.elements.about;
-  const title = form.elements.title;
-  const link = form.elements.link;*/
-
-function showError(inputElement, errorElement){
-    inputElement.classList.add("popup__input_invalid");
-    errorElement.textContent = inputElement.validationMessage;
+// Функция проверки длины значения поля
+const checkLengthValidity = (inputElement, minLength, maxLength) => {
+  const value = inputElement.value.trim();
+  const length = value.length;
+  return length >= minLength && length <= maxLength;
 };
 
-function hideError(inputElement, errorElement){
-    inputElement.classList.remove("popup__input_invalid");
-    errorElement.textContent = inputElement.validationMessage;
+// Функция обновления состояния кнопки сохранения
+const updateSaveButtonState = () => {
+  const isNameValid = checkLengthValidity(inputName, 2, 40);
+  const isAboutValid = checkLengthValidity(aboutInput, 2, 200);
+  saveButton.disabled = !(isNameValid && isAboutValid);
 };
 
-function disabledButton (buttonElement) {
-    buttonElement.disabled = "disabled";
-        buttonElement.classList.add("popup__button_invalid");
-}
-function enabledButton (buttonElement) {
-    buttonElement.disabled = false;
-    buttonElement.classList.remove("popup__button_invalid");
-}
+// Функция обработки события изменения значения поля
+const handleInputChange = () => {
+  updateSaveButtonState();
 
-  function checkInputValidity(inputElement, formElement) {
-    const isInputValid = inputElement.validity.valid;
-    const errorElement = formElement.querySelector(`#${inputElement.name}-error`)
-    if(!isInputValid){
-        showError(inputElement, errorElement);
-    } else {
-       hideError(inputElement, errorElement);
-    }
+  if (inputName.validity.valid) {
+    document.getElementById('name-error').textContent = '';
+  } else if (inputName.validity.valueMissing) {
+    document.getElementById('name-error').textContent = 'Необходимо заполнить данное поле';
+  } else if (inputName.validity.tooShort || inputName.validity.tooLong) {
+    document.getElementById('name-error').textContent = 'Минимальное количество символов: 2. Длина текста сейчас: ' + nameInput.value.length + ' символ.';
   }
 
-function toggleButtonState(buttonElement, isActive){
-    if(!isActive) {
-       disabledButton(buttonElement);
-    } else {
-        enabledButton();
-    }
-}
-
-
-
-
-
-
-
-   function setEventListener(formElement) {
-     const inputList = formElement.querySelectorAll('.popup__input');
-     const submitButtonElement = formElement.querySelector('.popup__button');
-     toggleButtonState(submitButtonElement, formElement.checkValidity());
-   [...inputList].forEach(function(inputElement){
-    toggleButtonState(submitButtonElement, formElement.checkValidity());
-    inputElement.addEventListener('input', function(){
-        checkInputValidity();
-    });
-   });
-
-    formElement.addEventListener('submit', (evt) => {
-        evt.preventDefault();
-        if(!formElement.checkValidity()) return;
-        });
-   }
-
-
-
-  function enableValidation() {
-    const formsList = document.querySelectorAll('.popup__form');
-    [...formsList].forEach(function (formElement){
-        setEventListener(formElement);
-    });
-
+  if (aboutInput.validity.valid) {
+    document.getElementById('about-error').textContent = '';
+  } else if (aboutInput.validity.valueMissing) {
+    document.getElementById('about-error').textContent = 'Необходимо заполнить данное поле';
+  } else if (aboutInput.validity.tooShort || aboutInput.validity.tooLong) {
+    document.getElementById('about-error').textContent = 'Минимальное количество символов: 2. Длина текста сейчас: ' + aboutInput.value.length + ' символ.';
   }
+};
 
-  enableValidation()
+// Добавляем обработчик события изменения значения поля
+inputName.addEventListener('input', handleInputChange);
+aboutInput.addEventListener('input', handleInputChange);
 
-
- 
+// Добавляем обработчик события отправки формы
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  // Дополнительная логика при отправке формы
+});
