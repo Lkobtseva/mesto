@@ -1,50 +1,79 @@
-// Получаем элементы формы и кнопку сохранения
-const form = document.querySelector('.popup__form');
-const inputName = document.querySelector('.popupinput_type_name');
-const aboutInput = document.querySelector('.popupinput_type_about');
-const saveButton = document.querySelector('.popup__button');
 
-// Функция проверки длины значения поля
-const checkLengthValidity = (inputElement, minLength, maxLength) => {
-  const value = inputElement.value.trim();
-  const length = value.length;
-  return length >= minLength && length <= maxLength;
+const config = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_invalid",
+  inputErrorClass: "popup__input_invalid",
+  errorElement: ".error"
 };
+enableValidation(config);
 
-// Функция обновления состояния кнопки сохранения
-const updateSaveButtonState = () => {
-  const isNameValid = checkLengthValidity(inputName, 2, 40);
-  const isAboutValid = checkLengthValidity(aboutInput, 2, 200);
-  saveButton.disabled = !(isNameValid && isAboutValid);
-};
+function enableValidation(config) {
+  const formsList = document.querySelectorAll(config.formSelector);
 
-// Функция обработки события изменения значения поля
-const handleInputChange = () => {
-  updateSaveButtonState();
+  formsList.forEach(function (formElement) {
+    setEventListener(formElement, config);
+  });
+}
 
-  if (inputName.validity.valid) {
-    document.getElementById('name-error').textContent = '';
-  } else if (inputName.validity.valueMissing) {
-    document.getElementById('name-error').textContent = 'Необходимо заполнить данное поле';
-  } else if (inputName.validity.tooShort || inputName.validity.tooLong) {
-    document.getElementById('name-error').textContent = 'Минимальное количество символов: 2. Длина текста сейчас: ' + nameInput.value.length + ' символ.';
+function showError(inputElement, errorMessage, config) {
+  inputElement.classList.add(config.inputErrorClass);
+  const errorElement = inputElement.parentElement.querySelector(`#${inputElement.name}-error`);
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add('popup__input-error_active');
+}
+
+function hideError(inputElement, config) {
+  const errorElement = inputElement.parentElement.querySelector(`#${inputElement.name}-error`);
+  inputElement.classList.remove(config.inputErrorClass);
+  errorElement.textContent = "";
+  errorElement.classList.remove('popup__input-error_active');
+}
+
+function checkInputValidity(inputElement, formElement, config) {
+  const isInputValid = inputElement.validity.valid;
+  if (!isInputValid) {
+    showError(inputElement, inputElement.validationMessage, config);
+  } else {
+    hideError(inputElement, config);
   }
+}
 
-  if (aboutInput.validity.valid) {
-    document.getElementById('about-error').textContent = '';
-  } else if (aboutInput.validity.valueMissing) {
-    document.getElementById('about-error').textContent = 'Необходимо заполнить данное поле';
-  } else if (aboutInput.validity.tooShort || aboutInput.validity.tooLong) {
-    document.getElementById('about-error').textContent = 'Минимальное количество символов: 2. Длина текста сейчас: ' + aboutInput.value.length + ' символ.';
+function disableButton(buttonElement, config) {
+  buttonElement.disabled = true;
+  buttonElement.classList.add(config.inactiveButtonClass);
+}
+
+function enableButton(buttonElement, config) {
+  buttonElement.disabled = false;
+  buttonElement.classList.remove(config.inactiveButtonClass);
+}
+
+function toggleButtonState(buttonElement, isActive, config) {
+  if (!isActive) {
+    disableButton(buttonElement, config);
+  } else {
+    enableButton(buttonElement, config);
   }
-};
+}
 
-// Добавляем обработчик события изменения значения поля
-inputName.addEventListener('input', handleInputChange);
-aboutInput.addEventListener('input', handleInputChange);
+function setEventListener(formElement, config) {
+  const inputList = formElement.querySelectorAll(config.inputSelector);
+  const submitButtonElement = formElement.querySelector(config.submitButtonSelector);
 
-// Добавляем обработчик события отправки формы
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  // Дополнительная логика при отправке формы
-});
+  toggleButtonState(submitButtonElement, formElement.checkValidity(), config);
+
+  inputList.forEach(function (inputElement) {
+    inputElement.addEventListener("input", function () {
+      toggleButtonState(submitButtonElement, formElement.checkValidity(), config);
+      checkInputValidity(inputElement, formElement, config);
+    });
+  });
+
+  formElement.addEventListener("submit", function (evt) {
+    evt.preventDefault();
+  });
+}
+
+enableValidation(config);

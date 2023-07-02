@@ -45,9 +45,11 @@ profileForm.addEventListener("click", (evt) => {
 });
 
 profileOpenButton.addEventListener("click", function () {
+  let event = new Event("input");
   openPopup(profileForm);
   nameInput.value = editedName.textContent;
   jobInput.value = editedJob.textContent;
+  nameInput.dispatchEvent(event)
 });
 
 profileCloseButton.addEventListener("click", function () {
@@ -56,7 +58,6 @@ profileCloseButton.addEventListener("click", function () {
 
 function handleFormSubmitPopup(evt) {
   evt.preventDefault();
-
   console.log(nameInput.value);
   console.log(jobInput.value);
   editedName.textContent = nameInput.value;
