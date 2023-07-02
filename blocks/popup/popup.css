@@ -13,3 +13,7 @@
   visibility: hidden;
   transition: visibility .5s,opacity .5s linear;
 }
+
+.popup_type_open-card{
+  background: rgb(0, 0, 0, 0.8999999761581421);
+}

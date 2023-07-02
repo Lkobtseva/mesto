@@ -5,7 +5,8 @@ const config = {
   submitButtonSelector: ".popup__button",
   inactiveButtonClass: "popup__button_invalid",
   inputErrorClass: "popup__input_invalid",
-  errorElement: ".error"
+  errorElement: ".error",
+  errorActive: "error_active"
 };
 enableValidation(config);
 
@@ -19,16 +20,16 @@ function enableValidation(config) {
 
 function showError(inputElement, errorMessage, config) {
   inputElement.classList.add(config.inputErrorClass);
-  const errorElement = inputElement.parentElement.querySelector(`#${inputElement.name}-error`);
+  const errorElement = document.querySelector(`#${inputElement.name}-error`);  
   errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__input-error_active');
+  errorElement.classList.add(config.errorActive);
 }
 
 function hideError(inputElement, config) {
-  const errorElement = inputElement.parentElement.querySelector(`#${inputElement.name}-error`);
+  const errorElement = document.querySelector(`#${inputElement.name}-error`); 
   inputElement.classList.remove(config.inputErrorClass);
   errorElement.textContent = "";
-  errorElement.classList.remove('popup__input-error_active');
+  errorElement.classList.remove(config.errorActive);
 }
 
 function checkInputValidity(inputElement, formElement, config) {
@@ -71,9 +72,6 @@ function setEventListener(formElement, config) {
     });
   });
 
-  formElement.addEventListener("submit", function (evt) {
-    evt.preventDefault();
-  });
 }
 
 enableValidation(config);

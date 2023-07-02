@@ -9,10 +9,12 @@ const editedJob = document.querySelector(".profile__subtitle");
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener('keydown', closeByEsc);
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.addEventListener('keydown', closeByEsc);
 }
 
 function closeOverlay() {
@@ -25,17 +27,12 @@ function closeOverlay() {
   );
 }
 
-function closeEsc(){
-  document.querySelectorAll('.popup').forEach(item => {
-    item.addEventlistener("keydown", (e) => {
-      item.focus()
-      if(e.key === 'Escape'){
-        console.log(e.key)
-        closePopup(item)
-      }
-  })
-})
-}
+function closeByEsc(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup); 
+  }
+} 
 
 
 profileForm.addEventListener("click", (evt) => {
@@ -45,11 +42,9 @@ profileForm.addEventListener("click", (evt) => {
 });
 
 profileOpenButton.addEventListener("click", function () {
-  let event = new Event("input");
   openPopup(profileForm);
   nameInput.value = editedName.textContent;
   jobInput.value = editedJob.textContent;
-  nameInput.dispatchEvent(event)
 });
 
 profileCloseButton.addEventListener("click", function () {
@@ -103,6 +98,8 @@ function handleCardFormSubmit(evt) {
   );
 
   cardForm.reset();
+  evt.submitter.classList.add('popup__button_invalid');
+  evt.submitter.disabled = true;
   closePopup(cardPopup);
 }
 cardPopup.addEventListener("submit", handleCardFormSubmit);
