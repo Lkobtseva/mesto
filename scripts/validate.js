@@ -1,4 +1,3 @@
-
 const config = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
@@ -6,7 +5,7 @@ const config = {
   inactiveButtonClass: "popup__button_invalid",
   inputErrorClass: "popup__input_invalid",
   errorElement: ".error",
-  errorActive: "error_active"
+  errorActive: "error_active",
 };
 enableValidation(config);
 
@@ -20,13 +19,13 @@ function enableValidation(config) {
 
 function showError(inputElement, errorMessage, config) {
   inputElement.classList.add(config.inputErrorClass);
-  const errorElement = document.querySelector(`#${inputElement.name}-error`);  
+  const errorElement = document.querySelector(`#${inputElement.name}-error`);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(config.errorActive);
 }
 
 function hideError(inputElement, config) {
-  const errorElement = document.querySelector(`#${inputElement.name}-error`); 
+  const errorElement = document.querySelector(`#${inputElement.name}-error`);
   inputElement.classList.remove(config.inputErrorClass);
   errorElement.textContent = "";
   errorElement.classList.remove(config.errorActive);
@@ -61,17 +60,22 @@ function toggleButtonState(buttonElement, isActive, config) {
 
 function setEventListener(formElement, config) {
   const inputList = formElement.querySelectorAll(config.inputSelector);
-  const submitButtonElement = formElement.querySelector(config.submitButtonSelector);
+  const submitButtonElement = formElement.querySelector(
+    config.submitButtonSelector
+  );
 
   toggleButtonState(submitButtonElement, formElement.checkValidity(), config);
 
   inputList.forEach(function (inputElement) {
     inputElement.addEventListener("input", function () {
-      toggleButtonState(submitButtonElement, formElement.checkValidity(), config);
+      toggleButtonState(
+        submitButtonElement,
+        formElement.checkValidity(),
+        config
+      );
       checkInputValidity(inputElement, formElement, config);
     });
   });
-
 }
 
 enableValidation(config);
