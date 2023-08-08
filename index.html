@@ -47,8 +47,10 @@
             <form class="popup__form" name="editor" novalidate>
                     <input class="popup__input popup__input_type_name" type="text" name="name" required minlength="2" maxlength="40"  placeholder="Ваше имя"/>
                     <span id="name-error" class="error"></span>
+                    <span id="name-lenght-error" class="error"></span>
                     <input class="popup__input popup__input_type_about" type="text" name="about" required minlength="2" maxlength="200"  placeholder="О себе"/>
                     <span id="about-error" class="error"></span>
+                    <span id="about-lenght-error"  class="error"></span>
                 <button class="popup__button" type="submit">Сохранить</button>
             </form>
         </div>
@@ -65,6 +67,7 @@
                     <input class="popup__input popup__input_type_link" type="url" name="link" minlength="2" required
                         placeholder="Ссылка на картинку">
                         <span id="link-error" class="error"></span>
+                        <span id="link-lenght-error" class="error"></span>
                 <button class="popup__button" type="submit">Сохранить</button>
             </form>
         </div>
