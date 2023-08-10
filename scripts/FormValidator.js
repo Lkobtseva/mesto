@@ -12,7 +12,7 @@ export default class FormValidator {
   this._config = config;
   this._formElement = formElement;
   }
-
+  
 
   _showError(inputElement, errorMessage) {
     const errorElement = this._formElement.querySelector(`#${inputElement.name}-error`);
@@ -77,7 +77,6 @@ _checkInputValidity(inputElement) {
       this._setEventListeners(formElement);
     });
   }}
-
 
 
 

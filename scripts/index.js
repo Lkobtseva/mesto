@@ -1,6 +1,6 @@
 const CardItem = new Card();
 const cardForm = document.querySelector(".popup__form_type_new-card");
-import { initialCards } from './card.js';
+
 
 //popup1
 const profileOpenButton = document.querySelector(".profile__edit-button");
@@ -70,7 +70,7 @@ const cardOpenButton = document.querySelector(".profile__button");
 const cardCloseButton = document.querySelector(
   ".popup__close-icon_type_new-card"
 );
-const cardPopup = document.querySelector(".popup_type_new-card");
+export const cardPopup = document.querySelector(".popup_type_new-card");
 
 cardOpenButton.addEventListener("click", function () {
   openPopup(cardPopup);
@@ -86,7 +86,7 @@ cardPopup.addEventListener("click", (evt) => {
   }
 });
 
-//добавление новой карточки
+/*//добавление новой карточки
 function createCard({ name, link }) {
   const templateElement = document.querySelector("#card__template").content.querySelector(".card");
   const cardElement = templateElement.cloneNode(true);
@@ -144,7 +144,7 @@ const cardListElement = document.querySelector(".cards__list");
 initialCards.forEach(function (item) {
   renderCard(item, cardListElement, "append");
 });
-
+*/
 
 //popup3
 export const imageForm = document.querySelector(".popup_type_open-card");
