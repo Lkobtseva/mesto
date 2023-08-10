@@ -7,12 +7,12 @@ const jobInput = document.querySelector(".popup__input_type_about");
 const editedName = document.querySelector(".profile__title");
 const editedJob = document.querySelector(".profile__subtitle");
 
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", closeByEsc);
 }
 
-function closePopup(popup) {
+export function closePopup(popup) {
   popup.classList.remove("popup_opened");
   document.addEventListener("keydown", closeByEsc);
 }
@@ -88,14 +88,14 @@ function handleCardFormSubmit(evt) {
   console.log(inputTitleElement.value);
   console.log(inputLinkElement.value);
 
-  renderCard(
+ /* renderCard(
     {
       name: inputTitleElement.value,
       link: inputLinkElement.value,
     },
     cardListElement,
     "prepend"
-  );
+  );*/
 
   cardForm.reset();
   evt.submitter.classList.add("popup__button_invalid");
@@ -106,11 +106,11 @@ cardPopup.addEventListener("submit", handleCardFormSubmit);
 
 
 //popup3
-const imageForm = document.querySelector(".popup_type_open-card");
+export const imageForm = document.querySelector(".popup_type_open-card");
 const imageFormCloseButton = document.querySelector(".popup__close-icon_type_open-card");
 const imageContainer = document.querySelector(".popup__image-container");
-const popupTitle = imageContainer.querySelector(".popup__image-title");
-const popupBg = imageContainer.querySelector(".popup__image");
+export const popupTitle = imageContainer.querySelector(".popup__image-title");
+export const popupBg = imageContainer.querySelector(".popup__image");
 const titleElement = document.querySelector(".card__title");
 const imageElement = document.querySelector(".card__image");
 const cardList = document.querySelector(".cards__list");
@@ -136,10 +136,10 @@ imageElement.addEventListener("click", function () {
 import Card from './card.js';
 new Card();
 import FormValidator from './FormValidator.js';
-
+import { config } from './FormValidator.js';
 const formElements = document.querySelectorAll('.popup__form'); 
 formElements.forEach((formElement) => {
 const formValidator = new FormValidator(config, formElement);
 formValidator.enableValidation();
 });
-
+import { inputTitleElement, inputLinkElement, cardForm } from './card.js'
