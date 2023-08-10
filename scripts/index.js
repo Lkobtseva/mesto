@@ -1,3 +1,7 @@
+const CardItem = new Card();
+const cardForm = document.querySelector(".popup__form_type_new-card");
+import { initialCards } from './card.js';
+
 //popup1
 const profileOpenButton = document.querySelector(".profile__edit-button");
 const profileCloseButton = document.querySelector(".popup__close-icon");
@@ -82,27 +86,64 @@ cardPopup.addEventListener("click", (evt) => {
   }
 });
 
+//добавление новой карточки
+function createCard({ name, link }) {
+  const templateElement = document.querySelector("#card__template").content.querySelector(".card");
+  const cardElement = templateElement.cloneNode(true);
+  const buttonDelElement = cardElement.querySelector(".card__deletebutton");
+  const imageElement = cardElement.querySelector(".card__image");
+  const textElement = cardElement.querySelector(".card__text");
+  const titleElement = textElement.querySelector(".card__title");
+  const likeElement = textElement.querySelector(".card__button");
+  titleElement.textContent = name;
+  imageElement.src = link;
+  imageElement.alt = name;
+  _setEventListeners(cardElement);
+  return cardElement;
+}
 function handleCardFormSubmit(evt) {
   evt.preventDefault();
-
+  const inputTitleElement = cardForm.querySelector(".popup__input_type_title");
+  const inputLinkElement = cardForm.querySelector(".popup__input_type_link");
+ 
   console.log(inputTitleElement.value);
   console.log(inputLinkElement.value);
-
- /* renderCard(
+  renderCard(
     {
       name: inputTitleElement.value,
-      link: inputLinkElement.value,
+      link: inputLinkElement.value
     },
     cardListElement,
     "prepend"
-  );*/
+  );
 
   cardForm.reset();
-  evt.submitter.classList.add("popup__button_invalid");
-  evt.submitter.disabled = true;
   closePopup(cardPopup);
 }
 cardPopup.addEventListener("submit", handleCardFormSubmit);
+
+function renderCard(data, container, position = "append") {
+  switch (position) {
+    case "append":
+      container.append(createCard(data));
+      break;
+    case "prepend":
+      container.prepend(createCard(data));
+      break;
+    case "before":
+      container.before(createCard(data));
+      break;
+    case "after":
+      container.after(createCard(data));
+      break;
+    default:
+      break;
+  }
+}
+const cardListElement = document.querySelector(".cards__list");
+initialCards.forEach(function (item) {
+  renderCard(item, cardListElement, "append");
+});
 
 
 //popup3
@@ -142,4 +183,4 @@ formElements.forEach((formElement) => {
 const formValidator = new FormValidator(config, formElement);
 formValidator.enableValidation();
 });
-import { inputTitleElement, inputLinkElement, cardForm } from './card.js'
+/*import { inputTitleElement,} from './card.js'*/
