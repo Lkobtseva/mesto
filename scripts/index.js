@@ -1,6 +1,9 @@
 const CardItem = new Card();
 const cardForm = document.querySelector(".popup__form_type_new-card");
-
+import Card from './card.js';
+new Card();
+import FormValidator from './FormValidator.js';
+import { config } from './FormValidator.js';
 
 //popup1
 const profileOpenButton = document.querySelector(".profile__edit-button");
@@ -174,13 +177,9 @@ imageElement.addEventListener("click", function () {
 });
 
 
-import Card from './card.js';
-new Card();
-import FormValidator from './FormValidator.js';
-import { config } from './FormValidator.js';
+
 const formElements = document.querySelectorAll('.popup__form'); 
 formElements.forEach((formElement) => {
 const formValidator = new FormValidator(config, formElement);
 formValidator.enableValidation();
 });
-/*import { inputTitleElement,} from './card.js'*/

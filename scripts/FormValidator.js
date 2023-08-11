@@ -14,29 +14,28 @@ export default class FormValidator {
   }
   
 
-  _showError(inputElement, errorMessage) {
-    const errorElement = this._formElement.querySelector(`#${inputElement.name}-error`);
-    inputElement.classList.add(this._config.inputErrorClass);
+  _showError(errorMessage) {
+    const errorElement = this._formElement.querySelector(`#${this._inputElement.name}-error`);
+    this._inputElement.classList.add(this._config.inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add('popup__input-error_active');
     }
     
-    _hideError(inputElement) {
-    const errorElement = this._formElement.querySelector(`#${inputElement.name}-error`);
-    inputElement.classList.remove(this._config.inputErrorClass);
+    _hideError() {
+    const errorElement = this._formElement.querySelector(`#${this._inputElement.name}-error`);
+    this._inputElement.classList.remove(this._config.inputErrorClass);
     errorElement.textContent = "";
     errorElement.classList.remove('popup__input-error_active');
     }
 
-_checkInputValidity(inputElement) {
-  const isInputValid = inputElement.validity.valid;
+_checkInputValidity() {
+  const isInputValid = this._inputElement.validity.valid;
   if (!isInputValid) {
-    this._showError(inputElement, inputElement.validationMessage);
+    this._showError(this._inputElement.validationMessage);
   } else {
-    this._hideError(inputElement);
+    this._hideError();
   }
 }
-
 
   _disableButton(buttonElement) {
     buttonElement.disabled = true;
@@ -59,11 +58,11 @@ _checkInputValidity(inputElement) {
   _setEventListeners(formElement) {
     const inputList = formElement.querySelectorAll(this._config.inputElement);
     const submitButtonElement = formElement.querySelector(this._config.submitButtonElement);
-
     this._toggleButtonState(submitButtonElement, formElement.checkValidity());
 
     inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
+        this._inputElement = inputElement;
         this._toggleButtonState(submitButtonElement, formElement.checkValidity());
         this._checkInputValidity(inputElement);
       });
@@ -80,5 +79,3 @@ _checkInputValidity(inputElement) {
 
 
 
-const formValidator = new FormValidator(config);
-formValidator.enableValidation();
