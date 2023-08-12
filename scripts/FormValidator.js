@@ -15,14 +15,14 @@ export default class FormValidator {
   
 
   _showError(errorMessage) {
-    const errorElement = this._formElement.querySelector(`#${this._inputElement.name}-error`);
+    const errorElement = document.querySelector(`#${this._inputElement.name}-error`);
     this._inputElement.classList.add(this._config.inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add('popup__input-error_active');
     }
     
     _hideError() {
-    const errorElement = this._formElement.querySelector(`#${this._inputElement.name}-error`);
+    const errorElement = document.querySelector(`#${this._inputElement.name}-error`);
     this._inputElement.classList.remove(this._config.inputErrorClass);
     errorElement.textContent = "";
     errorElement.classList.remove('popup__input-error_active');
