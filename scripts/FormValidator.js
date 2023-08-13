@@ -1,15 +1,7 @@
-export const config = {
-  formElement: ".popup__form",
-  inputElement: ".popup__input",
-  submitButtonElement: ".popup__button",
-  inactiveButtonClass: "popup__button_invalid",
-  inputErrorClass: "popup__input_invalid",
-  errorElement: ".error",
-  errorActive: "popup__input-error_active"
-};
+import { config } from "./constants.js";
 
 export default class FormValidator {
-  constructor(config, formElement) {
+  constructor(config, formElement, _inputList, _submitButtonElement) {
     this._config = config;
     this._formElement = formElement;
     this._inputList = formElement.querySelectorAll(this._config.inputElement);
@@ -63,14 +55,17 @@ export default class FormValidator {
     }
   }
 
-  _setEventListeners(formElement) {
-    this._toggleButtonState(this._submitButtonElement, formElement.checkValidity());
+  _setEventListeners() {
+    this._toggleButtonState(
+      this._submitButtonElement,
+      this._formElement.checkValidity()
+    );
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._inputElement = inputElement;
         this._toggleButtonState(
-          submitButtonElement,
-          formElement.checkValidity()
+          this._submitButtonElement,
+          this._formElement.checkValidity()
         );
         this._checkInputValidity(inputElement);
       });

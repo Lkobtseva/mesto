@@ -1,48 +1,21 @@
 import {
   openPopup,
-  closePopup,
   imagePopup,
   popupBg,
   popupTitle,
-  templateSelector
+  getTemplate,
+  templateSelector,
 } from "./index.js";
-const cardPopup = document.querySelector(".popup_type_new-card");
-
-export const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
 
 export default class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, name, link) {
     this._data = data;
     this._templateSelector = templateSelector;
+    this._name = name;
+    this._link = link;
   }
 
-
- _setEventListeners(cardElement) {
+  _setEventListeners(cardElement) {
     const likeElement = cardElement.querySelector(".card__button");
     const buttonDelElement = cardElement.querySelector(".card__deletebutton");
     const imageElement = cardElement.querySelector(".card__image");
@@ -76,30 +49,15 @@ export default class Card {
     popupBg.alt = altText;
   }
 
-   createCard({ name, link }) {
-    const templateElement = document
-      .querySelector(this._templateSelector)
-      .content.querySelector(".card");
-    const cardElement = templateElement.cloneNode(true);
+  createCard() {
+    const cardElement = getTemplate();
     const imageElement = cardElement.querySelector(".card__image");
     const textElement = cardElement.querySelector(".card__text");
     const titleElement = textElement.querySelector(".card__title");
-    titleElement.textContent = name;
-    imageElement.src = link;
-    imageElement.alt = name;
+    titleElement.textContent = this._name;
+    imageElement.src = this._link;
+    imageElement.alt = this._name;
     this._setEventListeners(cardElement);
     return cardElement;
   }
-
-
- 
 }
-/*const cardListElement = document.querySelector(".cards__list");
-
-initialCards.forEach(function (item) {
-const cardInstance = new Card(item); 
-const cardElement = cardInstance.createCard(item); 
-cardListElement.appendChild(cardElement);
-});*/
-
-
