@@ -1,11 +1,11 @@
 import { config } from "./constants.js";
 
 export default class FormValidator {
-  constructor(config, formElement, _inputList, _submitButtonElement) {
+  constructor(config, formElement) {
     this._config = config;
     this._formElement = formElement;
     this._inputList = formElement.querySelectorAll(this._config.inputElement);
-    this._submitButtonElement = formElement.querySelector(
+    this.submitButtonElement = formElement.querySelector(
       this._config.submitButtonElement
     );
   }
@@ -37,34 +37,34 @@ export default class FormValidator {
     }
   }
 
-  _disableButton(buttonElement) {
-    buttonElement.disabled = true;
-    buttonElement.classList.add(this._config.inactiveButtonClass);
+  disableButton() {
+    this.submitButtonElement.disabled = "disabled";
+    this.submitButtonElement.classList.add(this._config.inactiveButtonClass);
   }
 
-  _enableButton(buttonElement) {
-    buttonElement.disabled = false;
-    buttonElement.classList.remove(this._config.inactiveButtonClass);
+  enableButton() {
+    this.submitButtonElement.disabled = false;
+    this.submitButtonElement.classList.remove(this._config.inactiveButtonClass);
   }
 
-  _toggleButtonState(buttonElement, isActive) {
+  _toggleButtonState(isActive) {
     if (!isActive) {
-      this._disableButton(buttonElement);
+      this.disableButton(this.submitButtonElement);
     } else {
-      this._enableButton(buttonElement);
+      this.enableButton(this.submitButtonElement);
     }
   }
 
   _setEventListeners() {
     this._toggleButtonState(
-      this._submitButtonElement,
+      this.submitButtonElement,
       this._formElement.checkValidity()
     );
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._inputElement = inputElement;
         this._toggleButtonState(
-          this._submitButtonElement,
+          this.submitButtonElement,
           this._formElement.checkValidity()
         );
         this._checkInputValidity(inputElement);

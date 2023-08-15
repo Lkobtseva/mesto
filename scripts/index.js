@@ -1,7 +1,14 @@
 import { initialCards, config } from "./constants.js";
-import Card from "./Card.js";
+import Card from "./card.js";
 import FormValidator from "./FormValidator.js";
 
+//валидация
+const cardForm = document.querySelector(".popup__form_type_new-card");
+const formProfile = document.querySelector(".popup__form_type_edit");
+const formAddValidation = new FormValidator(config, cardForm);
+const formEditValidation = new FormValidator(config, formProfile);
+formEditValidation.enableValidation();
+formAddValidation.enableValidation();
 
 //открытие и закрытие попапа
 export function openPopup(popup) {
@@ -32,7 +39,6 @@ function closeByEsc(evt) {
 }
 
 //popup1
-const formProfile = document.querySelector(".popup__form_type_edit");
 const profilePopup = document.querySelector(".popup_type_edit");
 //кнопки
 const profileOpenButton = document.querySelector(".profile__edit-button");
@@ -76,11 +82,11 @@ const cardCloseButton = document.querySelector(
   ".popup__close-icon_type_new-card"
 );
 export const cardPopup = document.querySelector(".popup_type_new-card");
-const cardForm = document.querySelector(".popup__form_type_new-card");
 export const templateSelector = document.querySelector("#card__template");
 
 //открытие и закрытие 2 попапа
 cardOpenButton.addEventListener("click", function () {
+  formAddValidation.disableButton();
   openPopup(cardPopup);
 });
 
@@ -96,7 +102,9 @@ cardPopup.addEventListener("click", (evt) => {
 
 //вставка карточек
 export function getTemplate() {
-  const templateSelector = document.querySelector("#card__template").content.querySelector(".card");
+  const templateSelector = document
+    .querySelector("#card__template")
+    .content.querySelector(".card");
   return templateSelector.cloneNode(true);
 }
 
@@ -139,7 +147,9 @@ initialCards.forEach(function (item) {
 
 //popup3
 export const imagePopup = document.querySelector(".popup_type_open-card");
-const imageFormCloseButton = document.querySelector(".popup__close-icon_type_open-card");
+const imageFormCloseButton = document.querySelector(
+  ".popup__close-icon_type_open-card"
+);
 const imageContainer = document.querySelector(".popup__image-container");
 export const popupTitle = imageContainer.querySelector(".popup__image-title");
 export const popupBg = imageContainer.querySelector(".popup__image");
@@ -156,10 +166,3 @@ imagePopup.addEventListener("click", (evt) => {
     closePopup(imagePopup);
   }
 });
-
-//валидация
-const formEditValidation = new FormValidator(config, cardForm);
-const formAddValidation = new FormValidator(config, formProfile);
-
-formEditValidation.enableValidation();
-formAddValidation.enableValidation();
