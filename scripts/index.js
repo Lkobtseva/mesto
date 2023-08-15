@@ -1,6 +1,8 @@
 import { initialCards, config } from "./constants.js";
 import Card from "./card.js";
 import FormValidator from "./FormValidator.js";
+const inputTitleElement = document.querySelector(".popup__input_type_title");
+const inputLinkElement = document.querySelector(".popup__input_type_link");
 
 //валидация
 const cardForm = document.querySelector(".popup__form_type_new-card");
@@ -111,8 +113,6 @@ export function getTemplate() {
 //обработка формы карточек
 function handleCardFormSubmit(evt) {
   evt.preventDefault();
-  const inputTitleElement = cardPopup.querySelector(".popup__input_type_title");
-  const inputLinkElement = cardPopup.querySelector(".popup__input_type_link");
 
   console.log(inputTitleElement.value);
   console.log(inputLinkElement.value);
@@ -130,19 +130,24 @@ function handleCardFormSubmit(evt) {
 }
 cardPopup.addEventListener("submit", handleCardFormSubmit);
 
-function renderCard(data, elements) {
+function createCard(data) {
   const card = new Card(
     data,
     templateSelector,
     data.name,
     data.link
   ).createCard();
+  return card;
+}
+
+function renderCard(data, elements) {
+  const card = createCard(data);
   elements.prepend(card);
 }
 
 const cardListElement = document.querySelector(".cards__list");
 initialCards.forEach(function (item) {
-  renderCard(item, cardListElement, "append");
+  renderCard(item, cardListElement);
 });
 
 //popup3
