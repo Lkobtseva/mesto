@@ -1,11 +1,9 @@
 import {
-  openPopup,
-  imagePopup,
-  popupBg,
-  popupTitle,
-  getTemplate,
-  templateSelector,
-} from "./index.js";
+  imagePopup
+} from "../pages/index.js";
+
+import Popup from "./Popup.js";
+import { popupBg, popupTitle, templateSelector } from "../utils/constants.js";
 
 export default class Card {
   constructor(data, templateSelector, name, link) {
@@ -43,14 +41,18 @@ export default class Card {
   }
 
   _handleImageClick(title, imageUrl, altText) {
-    openPopup(imagePopup);
+    open(imagePopup);
     popupTitle.textContent = title;
     popupBg.src = imageUrl;
     popupBg.alt = altText;
   }
 
+  _getTemplate() {
+  return templateSelector.cloneNode(true);
+}
+
   createCard() {
-    this._cardElement = getTemplate();
+    this._cardElement = this._getTemplate();
     const imageElement = this._cardElement.querySelector(".card__image");
     const textElement = this._cardElement.querySelector(".card__text");
     const titleElement = textElement.querySelector(".card__title");

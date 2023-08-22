@@ -24,7 +24,7 @@ const cardCloseButton = document.querySelector(
   ".popup__close-icon_type_new-card"
 );
 //export const cardPopup = document.querySelector(".popup_type_new-card");
-export const templateSelector = document.querySelector("#card__template");
+export const templateSelector = document.querySelector("#card__template").content.querySelector(".card");
 
 
 
