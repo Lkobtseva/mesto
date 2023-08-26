@@ -21,9 +21,8 @@ export default class Popup {
     }
   
     setEventListeners() {
-      const overlay = this._popup.querySelector(".popup");
-      overlay.addEventListener("click", (e) => {
-        if (e.target.classList.contains("popup")) {
+      this._popup.addEventListener("click", (e) => {
+        if (e.target.classList.contains("popup_opened")) {
           this.close();
         }
       });
@@ -33,12 +32,12 @@ export default class Popup {
         this.close();
       });
       
-      this._form = this._popup.querySelector(".popup__form");
+      /*this._form = this._popup.querySelector(".popup__form");
       if (this._form) {
         this._form.addEventListener("submit", (evt) => {
           evt.preventDefault();
           this.handleFormSubmit();
         });
-      }
+      }*/
     }
   }

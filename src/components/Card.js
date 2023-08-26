@@ -3,14 +3,13 @@ import {
 } from "../pages/index.js";
 
 import Popup from "./Popup.js";
-import { popupBg, popupTitle, templateSelector } from "../utils/constants.js";
+import { popupBg, popupTitle} from "../utils/constants.js";
 
 export default class Card {
-  constructor(data, templateSelector, name, link) {
+  constructor(data, templateSelector, handleCardClick) {
     this._data = data;
-    this._templateSelector = templateSelector;
-    this._name = name;
-    this._link = link;
+    this._templateSelector = document.querySelector(templateSelector).content.querySelector('.card');
+    this._handleCardClick = handleCardClick;
   }
 
   _setEventListeners() {
@@ -48,7 +47,7 @@ export default class Card {
   }
 
   _getTemplate() {
-  return templateSelector.cloneNode(true);
+  return this._templateSelector.cloneNode(true);
 }
 
   createCard() {
@@ -56,9 +55,9 @@ export default class Card {
     const imageElement = this._cardElement.querySelector(".card__image");
     const textElement = this._cardElement.querySelector(".card__text");
     const titleElement = textElement.querySelector(".card__title");
-    titleElement.textContent = this._name;
-    imageElement.src = this._link;
-    imageElement.alt = this._name;
+    titleElement.textContent = this._data.name;
+    imageElement.src = this._data.link;
+    imageElement.alt = this._data.name;
     this._setEventListeners();
     return this._cardElement;
   }

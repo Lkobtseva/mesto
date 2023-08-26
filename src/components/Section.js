@@ -12,15 +12,14 @@ export default class Section {
     clear() {
       this._container.innerHTML = "";
     }
-  
+    
     renderItems() {
       this.clear();
       this._items.forEach((item) => {
-        const cardElement = this._renderer(item); 
-  
-        this.setItem(cardElement);
+      this._renderer(item);
       });
     }
+    
   }
 
 
