@@ -1,4 +1,4 @@
-//import './index.css';
+import "./index.css";
 
 import { initialCards, config, profileOpenButton, cardOpenButton } from "../utils/constants.js";
 import Card from "../components/card.js";
