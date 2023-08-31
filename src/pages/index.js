@@ -1,62 +1,88 @@
 import "./index.css";
-
-import { initialCards, config, profileOpenButton, cardOpenButton } from "../utils/constants.js";
+import { initialCards, config, profileOpenButton, cardOpenButton, buttonSubmitElement } from "../utils/constants.js";
 import Card from "../components/card.js";
 import Section from "../components/Section.js";
 import FormValidator from "../components/FormValidator.js";
-import Popup from "../components/Popup.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 
-///class section
-const rendererCard = (data) => {
-  const card = new Card(data, "#card__template", handleCardClick).createCard();
-  defaultCardList.setItem(card);
-};
+//формы
+const cardForm = document.querySelector(".popup__form_type_new-card");
+const formProfile = document.querySelector(".popup__form_type_edit");
 
-const defaultCardList = new Section({ items: initialCards, renderer: rendererCard }, ".cards__list");
-defaultCardList.renderItems();
-
-function handleCardClick(name, link) {
-  imagePopup.open(name, link);
-}
-
-///class userinfo
-const userInfo = new UserInfo({
-  nameSelector: ".profile__title",
-  aboutSelector: ".profile__subtitle",
-});
-const userData = userInfo.getUserInfo();
-
-///popupы
+//попап с картинкой
 export const popupSelector = document.querySelector(".popup");
-const profilePopup = document.querySelector(".popup_type_edit");
-const cardPopup = document.querySelector(".popup_type_new-card");
+const popupImage = document.querySelector('.popup__image');
+const popupText = document.querySelector('.popup__image-title');
 export const imagePopup = document.querySelector(".popup_type_open-card");
 
+//попап редактирования профиля
+const profilePopup = document.querySelector(".popup_type_edit");
 
-export const popupOpenImage = new PopupWithImage(".popup_type_open-card");
+//попап добавления новой карточки
+const cardPopup = document.querySelector(".popup_type_new-card");
+
+//инициализвция и обработчики
+const popupOpenImage = new PopupWithImage('.popup_type_open-card');
+popupOpenImage.setEventListeners();
+const handleCardClick = (name, link) => {
+  popupOpenImage.open(name, link);
+};
 
 const profilePopupForm = new PopupWithForm(".popup_type_edit", (data) => {
   userInfo.setUserInfo(data);
   profilePopupForm.close();
 });
-const addCardPopupForm = new PopupWithForm(".popup_type_new-card", (data) => {
-  rendererCard(data);
+profilePopupForm.setEventListeners();
+
+const addCardPopupForm = new PopupWithForm(".popup_type_new-card", handleSubmitForm);
+addCardPopupForm.setEventListeners();
+
+function handleSubmitForm(data) {
+
+  const cardData = {
+    name: data.title,
+    link: data.link,
+  };
+  renderCard(cardData);
   addCardPopupForm.close();
+}
+
+///section создание карточек 
+const renderCard = (data) => {
+  const card = new Card({ data, handleCardClick },
+    "#card__template").createCard();
+  defaultCardList.setItem(card);
+};
+
+const defaultCardList = new Section({ items: initialCards, renderer: renderCard }, ".cards__list");
+defaultCardList.renderItems();
+
+//сабмиты 
+cardForm.addEventListener("submit", (evt) => {
+  evt.preventDefault();
+});
+formProfile.addEventListener("submit", (evt) => {
+  evt.preventDefault();
 });
 
-profilePopupForm.setEventListeners();
-addCardPopupForm.setEventListeners();
-popupOpenImage.setEventListeners();
-
-
-
 cardOpenButton.addEventListener('click', () => {
-  //addCardPopupForm.resetValidation();
   addCardPopupForm.open();
+  formAddValidation.disableButton();
 })
+
+profileOpenButton.addEventListener('click', () => {
+  profilePopupForm.open();
+  formEditValidation.disableButton();
+})
+
+
+///userinfo
+const userInfo = new UserInfo({
+  nameSelector: ".profile__title",
+  aboutSelector: ".profile__subtitle",
+});
 
 profileOpenButton.addEventListener('click', () => {
   profilePopupForm.setInputValues(userInfo.getUserInfo());
@@ -64,8 +90,6 @@ profileOpenButton.addEventListener('click', () => {
 })
 
 //валидация
-const cardForm = document.querySelector(".popup__form_type_new-card");
-const formProfile = document.querySelector(".popup__form_type_edit");
 const formAddValidation = new FormValidator(config, cardForm);
 const formEditValidation = new FormValidator(config, formProfile);
 formEditValidation.enableValidation();

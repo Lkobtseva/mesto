@@ -1,18 +1,11 @@
-import {
-  imagePopup
-} from "../pages/index.js";
-
-import Popup from "./Popup.js";
-import { popupBg, popupTitle} from "../utils/constants.js";
-
 export default class Card {
-  constructor(data, templateSelector, handleCardClick) {
+  constructor({data, handleCardClick}, templateSelector) {
     this._data = data;
     this._templateSelector = document.querySelector(templateSelector).content.querySelector('.card');
     this._handleCardClick = handleCardClick;
   }
 
-  _setEventListeners() {
+  setEventListeners() {
     const likeElement = this._cardElement.querySelector(".card__button");
     const buttonDelElement = this._cardElement.querySelector(".card__deletebutton");
     const imageElement = this._cardElement.querySelector(".card__image");
@@ -27,23 +20,12 @@ export default class Card {
     });
 
     imageElement.addEventListener("click", () => {
-      this._handleImageClick(
-        titleElement.textContent,
-        imageElement.src,
-        titleElement.name
-      );
+      this._handleCardClick(this._data.name, this._data.link);
     });
   }
 
   _deleteCard() {
     this._cardElement.remove();
-  }
-
-  _handleImageClick(title, imageUrl, altText) {
-    open(imagePopup);
-    popupTitle.textContent = title;
-    popupBg.src = imageUrl;
-    popupBg.alt = altText;
   }
 
   _getTemplate() {
@@ -58,7 +40,7 @@ export default class Card {
     titleElement.textContent = this._data.name;
     imageElement.src = this._data.link;
     imageElement.alt = this._data.name;
-    this._setEventListeners();
+    this.setEventListeners();
     return this._cardElement;
   }
 }
