@@ -1,12 +1,12 @@
-import { config } from "../utils/constants.js";
+import { configValidator } from "../utils/constants.js";
 
 export default class FormValidator {
-  constructor(config, formElement) {
-    this._config = config;
+  constructor(configValidator, formElement) {
+    this._configValidator = configValidator;
     this._formElement = formElement;
-    this._inputList = formElement.querySelectorAll(this._config.inputElement);
+    this._inputList = formElement.querySelectorAll(this._configValidator.inputElement);
     this.submitButtonElement = formElement.querySelector(
-      this._config.submitButtonElement
+      this._configValidator.submitButtonElement
     );
   }
 
@@ -14,18 +14,18 @@ export default class FormValidator {
     const errorElement = document.querySelector(
       `#${this._inputElement.name}-error`
     );
-    this._inputElement.classList.add(this._config.inputErrorClass);
+    this._inputElement.classList.add(this._configValidator.inputErrorClass);
     errorElement.textContent = errorMessage;
-    errorElement.classList.add(this._config.errorActive);
+    errorElement.classList.add(this._configValidator.errorActive);
   }
 
   _hideError() {
     const errorElement = document.querySelector(
       `#${this._inputElement.name}-error`
     );
-    this._inputElement.classList.remove(this._config.inputErrorClass);
+    this._inputElement.classList.remove(this._configValidator.inputErrorClass);
     errorElement.textContent = "";
-    errorElement.classList.remove(this._config.errorActive);
+    errorElement.classList.remove(this._configValidator.errorActive);
   }
 
   _checkInputValidity() {
@@ -39,12 +39,12 @@ export default class FormValidator {
 
   disableButton() {
     this.submitButtonElement.disabled = "disabled";
-    this.submitButtonElement.classList.add(this._config.inactiveButtonClass);
+    this.submitButtonElement.classList.add(this._configValidator.inactiveButtonClass);
   }
 
   enableButton() {
     this.submitButtonElement.disabled = false;
-    this.submitButtonElement.classList.remove(this._config.inactiveButtonClass);
+    this.submitButtonElement.classList.remove(this._configValidator.inactiveButtonClass);
   }
 
   _toggleButtonState(isActive) {

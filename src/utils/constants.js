@@ -8,6 +8,7 @@ const inputLinkElement = document.querySelector(".popup__input_type_link");
 //редактировать профиль
 export const profileOpenButton = document.querySelector(".profile__edit-button"); 
 const profileCloseButton = document.querySelector(".popup__close-icon");
+export const avatarEditButton = document.querySelector(".profile__edit-avatar");
 
 //попап с картинкой
 const imageFormCloseButton = document.querySelector(".popup__close-icon_type_open-card");
@@ -55,7 +56,7 @@ export const initialCards = [
   },
 ];
 
-export const config = {
+export const configValidator = {
   formElement: ".popup__form",
   inputElement: ".popup__input",
   submitButtonElement: ".popup__button",
@@ -64,3 +65,4 @@ export const config = {
   errorElement: ".error",
   errorActive: "popup__input-error_active",
 };
+
