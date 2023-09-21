@@ -5,10 +5,10 @@ export default class PopupWithForm extends Popup {
   constructor(popupSelector, handleSubmitForm, buttonText) {
     super(popupSelector);
     this._formElement = this._popup.querySelector(".popup__form");
+    this._inputs = Array.from(this._formElement.querySelectorAll(".popup__input"))
     this._popupFormButton = this._formElement.querySelector('.popup__button');
     this._handleSubmitForm = handleSubmitForm;
     this.#buttonText = buttonText;
-    this._inputs = Array.from(this._formElement.querySelectorAll(".popup__input"))
   }
 
   getInputValues() {
@@ -24,6 +24,7 @@ export default class PopupWithForm extends Popup {
       input.value = data[input.name];
     });
   }
+
   loading(isLoading) {
     if (isLoading) {
       this._popupFormButton.textContent = 'Загрузка...';

@@ -23,35 +23,42 @@ const userInfo = new UserInfo({
 // API
 const api = new Api(configApi);
 let userId;
-Promise.all([api.getUserData(), api.getInitialCards()])
-  .then(([userData, cardItems]) => {
+
+api.getUserData()
+  .then(userData => {
     userInfo.setUserInfo(userData);
     userInfo.setUserAvatar(userData);
     userId = userData._id;
-    sectionInstance.renderItems(cardItems);
+    return api.getInitialCards();
   })
-  .catch((err) => console.log(err));
+  .then(cardItems => {
+    sectionItem.renderItems(cardItems);
+  })
+  .catch(err => {
+    console.log(err);
+  });
 
 // Section
-const sectionInstance = new Section(renderCard, '.cards__list');
+const sectionItem = new Section(renderCard, '.cards__list');
 function renderCard({ data, position = 'append' }) {
-  const cardElement = new Card({ data, userId, handleClickLike, handleClickDelete, handleClickCard }, '#card__template').createCardElement();
-  sectionInstance.setItem(cardElement, position);
+  const cardInstance = new Card({ data, userId, handleLikeCard, handleDeleteCard, handleClickCard }, '#card__template');
+  const cardElement = cardInstance.createCardElement();
+  sectionItem.setItem(cardElement, position);
   return cardElement;
 }
 
 // Image Popup
-const popupImageInstance = new PopupWithImage('.popup_type_open-card');
-popupImageInstance.setEventListeners();
+const popupImageItem = new PopupWithImage('.popup_type_open-card');
+popupImageItem.setEventListeners();
 function handleClickCard(cardData) {
-  popupImageInstance.open(cardData);
+  popupImageItem.open(cardData);
 }
 
 // Add Card Popup
-const popupAddFormInstance = new PopupWithForm('.popup_type_new-card', handleSubmitCard);
-popupAddFormInstance.setEventListeners();
+const popupAddFormItem = new PopupWithForm('.popup_type_new-card', handleSubmitCard);
+popupAddFormItem.setEventListeners();
 cardOpenButton.addEventListener('click', () => {
-  popupAddFormInstance.open();
+  popupAddFormItem.open();
 });
 
 function handleSubmitCard(cardData) {
@@ -62,79 +69,94 @@ function handleSubmitCard(cardData) {
   cardData.title= nameValue;
   cardData.link = linkValue;
 
-  popupAddFormInstance.loading(true);
+  popupAddFormItem.loading(true);
   api.addNewCard(cardData)
     .then((res) => {
       console.log(cardData);
       renderCard({ data: res, position: 'prepend' });
-      popupAddFormInstance.close();
+      popupAddFormItem.close();
     })
-    .catch((err) => console.log(err))
-    .finally(() => popupAddFormInstance.loading(false));
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      popupAddFormItem.loading(false);
+    });
 }
+
 const formAddValidation = new FormValidator(configValidator, cardForm);
 formAddValidation.enableValidation();
 
 // Profile Popup
-const profilePopupFormInstance = new PopupWithForm(".popup_type_edit", handleSubmitProfile);
-profilePopupFormInstance.setEventListeners();
+const profilePopupFormItem = new PopupWithForm(".popup_type_edit", handleSubmitProfile);
+profilePopupFormItem.setEventListeners();
 
 function handleSubmitProfile(data) {
   userInfo.setUserInfo(data);
-  profilePopupFormInstance.close();
+  profilePopupFormItem.close();
 }
 profileOpenButton.addEventListener('click', () => {
-  profilePopupFormInstance.setInputValues(userInfo.getUserInfo());
-  profilePopupFormInstance.open();
+  profilePopupFormItem.setInputValues(userInfo.getUserInfo());
+  profilePopupFormItem.open();
 });
 
 // Avatar Popup
-const popupAvatarFormInstance = new PopupWithForm('.popup_type_edit-avatar', handleSubmitAvatar);
-popupAvatarFormInstance.setEventListeners();
+const popupAvatarFormItem = new PopupWithForm('.popup_type_edit-avatar', handleSubmitAvatar);
+popupAvatarFormItem.setEventListeners();
 
 function handleSubmitAvatar(avatarData) {
-  popupAvatarFormInstance.loading(true);
+  popupAvatarFormItem.loading(true);
+
   api.editProfileAvatar(avatarData)
     .then(() => {
       userInfo.setUserAvatar(avatarData);
-      popupAvatarFormInstance.close();
+      popupAvatarFormItem.close();
     })
-    .catch((err) => console.log(err))
-    .finally(() => popupAvatarFormInstance.loading(false));
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      popupAvatarFormItem.loading(false);
+    });
 }
 
 avatarEditButton.addEventListener('click', () => {
-  popupAvatarFormInstance.open();
+  popupAvatarFormItem.open();
 });
 const validateAvatar = new FormValidator(configValidator, avatarForm);
 validateAvatar.enableValidation();
 
 // Card Functions
-function handleClickLike(cardElement) {
-  if (cardElement.likeCard()) {
-    api.unlikeCard(cardElement.getCardId())
-      .then((res) => cardElement.likeCard(res.likes.length))
-      .catch((err) => console.log(err));
-  } else {
-    api.likeCard(cardElement.getCardId())
-      .then((res) => cardElement.likeCard(res.likes.length))
-      .catch((err) => console.log(err));
-  }
-}
-// PopupWithConfirmation
-const popupWithConfirmationInstance = new PopupWithConfirmation('.popup_type_delete-card', handleClickDelete);
-popupWithConfirmationInstance.setEventListeners();
+function handleLikeCard(cardElement) {
+  const cardId = cardElement.getCardId();
+  const likeCheck = cardElement.likeCheck(); // Get the current like state
 
-function handleClickDelete(cardElement) {
-  popupWithConfirmationInstance.open();
-  popupWithConfirmationInstance.submit(() => {
-    popupWithConfirmationInstance.loading(true);
+  const apiCall = likeCheck ? api.unlikeCard(cardId) : api.likeCard(cardId);
+
+  apiCall
+    .then((res) => cardElement.likeCard(res.likes.length))
+    .catch((err) => console.log(err));
+}
+
+
+// PopupWithConfirmation
+const popupWithConfirmationItem = new PopupWithConfirmation('.popup_type_delete-card', handleDeleteCard);
+popupWithConfirmationItem.setEventListeners();
+
+function handleDeleteCard(cardElement) {
+  popupWithConfirmationItem.open();
+  popupWithConfirmationItem.submit(() => {
+    popupWithConfirmationItem.loading(true);
     api.removeCard(cardElement.getCardId())
       .then(() => {
         cardElement.deleteCard();
-        popupWithConfirmationInstance.close();
+        popupWithConfirmationItem.close();
       })
-      .catch((err) => console.log(err))
-      .finally(() => popupWithConfirmationInstance.loading(false));
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        popupWithConfirmationItem.loading(false);
+      });
   });
 }

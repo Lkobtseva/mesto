@@ -5,8 +5,8 @@ export default class Card {
   #likes;
   #cardElement;
   #templateSelector;
-  #handleClickLike
-  #handleClickDelete
+  #handleLikeCard;
+  #handleDeleteCard;
   #handleClickCard;
   #cardTitle;
   #cardImage;
@@ -14,15 +14,20 @@ export default class Card {
   #cardLikeCounter
   #cardTrash;
 
-  constructor({ data, userId, handleClickLike, handleClickDelete, handleClickCard }, templateSelector) {
+  constructor({ data, userId, handleLikeCard, handleDeleteCard, handleClickCard }, templateSelector) {
     this.#data = data;
-    this.#ownerId = data.owner._id;
     this.#userId = userId;
-    this.#likes = data.likes;
     this.#templateSelector = templateSelector;
-    this.#handleClickLike = handleClickLike;
-    this.#handleClickDelete = handleClickDelete;
+    this.#handleLikeCard = handleLikeCard;
+    this.#handleDeleteCard = handleDeleteCard;
     this.#handleClickCard = handleClickCard;
+    this.#likes = data.likes;
+    this.#ownerId = data.owner._id;
+  }
+  #setEventListeners() {
+    this.#cardLike.addEventListener('click', () => { this.#handleLikeCard(this)});
+    this.#cardTrash.addEventListener('click', () => { this.#handleDeleteCard(this)});
+    this.#cardImage.addEventListener('click', () => { this.#handleClickCard(this.#data)});
   }
 
   #getTemplate() {
@@ -31,10 +36,13 @@ export default class Card {
       .content.querySelector('.card').cloneNode(true)
   }
 
-  #setEventListeners() {
-    this.#cardLike.addEventListener('click', () => { this.#handleClickLike(this)});
-    this.#cardTrash.addEventListener('click', () => { this.#handleClickDelete(this)});
-    this.#cardImage.addEventListener('click', () => { this.#handleClickCard(this.#data)});
+  getCardId() {
+    return this.#data._id;
+  }
+
+  getCardsData() {
+    const { name, _id, link } = this.#data;
+    return { name, _id, link };
   }
 
   likeCheck() {
@@ -66,15 +74,6 @@ export default class Card {
     this.#cardElement = null;
   }
 
-  getCardId() {
-    return this.#data._id;
-  }
-
-  getCardsData() {
-    const { name, _id, link } = this.#data;
-    return { name, _id, link };
-  }
-
   createCardElement() {
     this.#cardElement = this.#getTemplate();
     this.#cardTitle = this.#cardElement.querySelector('.card__title');
@@ -86,6 +85,7 @@ export default class Card {
     this.#cardImage.src = this.#data.link;
     this.#cardImage.alt = this.#data.name;
     this.#cardLikeCounter.textContent = this.#likes.length;
+
     this.showActiveLikes();
     this.showTrash();
     this.#setEventListeners();
