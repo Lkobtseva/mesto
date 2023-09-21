@@ -1,4 +1,3 @@
-
 export default class Section {
   #renderer;
   #containerParentElement;

@@ -37,7 +37,7 @@ export default class Card {
     this.#cardImage.addEventListener('click', () => { this.#handleClickCard(this.#data)});
   }
 
-  isLiked() {
+  likeCheck() {
     return this.#cardLike.classList.contains('card__button_active');
   }
 
@@ -77,13 +77,11 @@ export default class Card {
 
   createCardElement() {
     this.#cardElement = this.#getTemplate();
-
     this.#cardTitle = this.#cardElement.querySelector('.card__title');
     this.#cardImage = this.#cardElement.querySelector('.card__image');
     this.#cardLike = this.#cardElement.querySelector('.card__button');
     this.#cardLikeCounter = this.#cardElement.querySelector('.card__like-number');
     this.#cardTrash = this.#cardElement.querySelector('.card__deletebutton');
-
     this.#cardTitle.textContent = this.#data.name;
     this.#cardImage.src = this.#data.link;
     this.#cardImage.alt = this.#data.name;

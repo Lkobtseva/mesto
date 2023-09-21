@@ -1,29 +1,30 @@
-import { Popup } from "./Popup";
+import Popup from "./Popup";
 
+export default class PopupWithConfirmation extends Popup {
+    constructor(popupSelector, handleSubmitForm) {
+        super(popupSelector)
+        this._popupForm = this._popup.querySelector('.popup__form');
+        this._popupFormButton = this._popupForm.querySelector('.popup__button');
+        this._hhandleSubmitForm = handleSubmitForm;
+    }
 
-export class PopupWithConfirmation extends Popup {
-  constructor(popupSelector) {
-    super(popupSelector);
-    this._popupForm = this._popupElement.querySelector('.popup__form');
-    this._popupFormButton = this._popupForm.querySelector('.popup__save-button');
-    this._setEventListeners();
-  }
+    loading(isLoading) {
+        if (isLoading) {
+            this._popupFormButton.textContent = 'Удаление...';
+        } else {
+            this._popupFormButton.textContent = 'Да';
+        }
+    }
 
-  loading(isLoading) {
-    this._popupFormButton.textContent = isLoading ? 'Удаление...' : 'Да';
-  }
+    submit(action) {
+        this._handleSubmitForm = action;
+    }
 
-  setSubmitAction(submitHandler) {
-    this._submitHandler = submitHandler;
-  }
-
-  _setEventListeners() {
-    super._setEventListeners();
-    this._popupForm.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-      if (this._submitHandler) {
-        this._submitHandler();
-      }
-    });
-  }
+    setEventListeners() {
+        super.setEventListeners();
+        this._popupForm.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+            this._handleSubmitForm();
+        });
+    }
 }

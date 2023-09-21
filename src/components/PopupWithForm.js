@@ -2,21 +2,21 @@ import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
   #buttonText;
-  constructor(popupSelector, handleSubmitForm ,buttonText) {
+  constructor(popupSelector, handleSubmitForm, buttonText) {
     super(popupSelector);
     this._formElement = this._popup.querySelector(".popup__form");
     this._popupFormButton = this._formElement.querySelector('.popup__button');
-    this._handleSubmitForm = handleSubmitForm ;
+    this._handleSubmitForm = handleSubmitForm;
     this.#buttonText = buttonText;
     this._inputs = Array.from(this._formElement.querySelectorAll(".popup__input"))
   }
 
   getInputValues() {
-   this._formValues = {};
+    const formValues = {};
     this._inputs.forEach((input) => {
-      this._formValues[input.name] = input.value;
+      formValues[input.name] = input.value;
     });
-    return this._formValues;
+    return formValues;
   }
 
   setInputValues(data) {
@@ -24,11 +24,12 @@ export default class PopupWithForm extends Popup {
       input.value = data[input.name];
     });
   }
-
   loading(isLoading) {
-    (isLoading)
-    ? this._popupFormButton.textContent = 'Загрузка...'
-    : this._popupFormButton.textContent = `${this.#buttonText}`
+    if (isLoading) {
+      this._popupFormButton.textContent = 'Загрузка...';
+    } else {
+      this._popupFormButton.textContent = `${this.#buttonText}`
+    }
   }
 
   setEventListeners() {

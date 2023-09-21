@@ -17,7 +17,13 @@ export const popupTitle = imageContainer.querySelector(".popup__image-title");
 export const popupBg = imageContainer.querySelector(".popup__image");
 const titleElement = document.querySelector(".card__title");
 const imageElement = document.querySelector(".card__image");
+const popupImage = document.querySelector('.popup__image');
+const popupText = document.querySelector('.popup__image-title');
+//попап редактирования профиля
+const profilePopup = document.querySelector(".popup_type_edit");
 
+//попап добавления новой карточки
+const cardPopup = document.querySelector(".popup_type_new-card");
 //инпуты и поля текста
 const nameInput = document.querySelector(".popup__input_type_name");
 const jobInput = document.querySelector(".popup__input_type_about");
@@ -26,8 +32,13 @@ const editedJob = document.querySelector(".profile__subtitle");
 
 //разметка
 const cardListElement = document.querySelector(".cards__list");
-
-
+//forms
+export const cardForm = document.querySelector(".popup__form_type_new-card");
+export const formProfile = document.querySelector(".popup__form_type_edit");
+export const avatarForm = document.querySelector(".popup__form_type_edit-avatar");
+//попап с картинкой
+export const popupSelector = document.querySelector(".popup");
+export const imagePopup = document.querySelector(".popup_type_open-card");
 
 export const initialCards = [
   {
@@ -66,3 +77,10 @@ export const configValidator = {
   errorActive: "popup__input-error_active",
 };
 
+export const configApi = {
+  url: 'https://mesto.nomoreparties.co/v1/cohort-73',
+  headers: {
+    authorization: 'c3be00b2-ec0b-4b8e-8979-18e6752e4cfe',
+    "content-type": "application/json"
+  }
+};
