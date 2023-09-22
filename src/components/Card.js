@@ -45,7 +45,7 @@ export default class Card {
     return { name, _id, link };
   }
 
-  likeCheck() {
+  checkLike() {
     return this.#cardLike.classList.contains('card__button_active');
   }
 

@@ -8,10 +8,8 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import { Api } from "../components/Api.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
-
-//validation
-const formEditValidation = new FormValidator(configValidator, formProfile);
-formEditValidation.enableValidation();
+const inputName = document.querySelector('[name="name"]');
+const inputLink = document.querySelector('[name="link"]');
 
 // UserInfo
 const userInfo = new UserInfo({
@@ -62,8 +60,6 @@ cardOpenButton.addEventListener('click', () => {
 });
 
 function handleSubmitCard(cardData) {
-  const inputName = document.querySelector('[name="name"]');
-  const inputLink = document.querySelector('[name="link"]');
   const nameValue = inputName.value;
   const linkValue = inputLink.value;
   cardData.title= nameValue;
@@ -91,15 +87,24 @@ formAddValidation.enableValidation();
 const profilePopupFormItem = new PopupWithForm(".popup_type_edit", handleSubmitProfile);
 profilePopupFormItem.setEventListeners();
 
-function handleSubmitProfile(data) {
-  userInfo.setUserInfo(data);
-  profilePopupFormItem.close();
-}
 profileOpenButton.addEventListener('click', () => {
   profilePopupFormItem.setInputValues(userInfo.getUserInfo());
   profilePopupFormItem.open();
 });
 
+function handleSubmitProfile(dataProfile) {
+  profilePopupFormItem.loading(true);
+  api.editUserProfile(dataProfile)
+    .then(() => {
+      userInfo.setUserInfo(dataProfile);
+      profilePopupFormItem.close()
+    })
+    .catch((err) => console.log(err))
+    .finally(() => profilePopupFormItem.loading(false));
+}
+
+const formEditValidation = new FormValidator(configValidator, formProfile);
+formEditValidation.enableValidation();
 // Avatar Popup
 const popupAvatarFormItem = new PopupWithForm('.popup_type_edit-avatar', handleSubmitAvatar);
 popupAvatarFormItem.setEventListeners();
@@ -129,9 +134,9 @@ validateAvatar.enableValidation();
 // Card Functions
 function handleLikeCard(cardElement) {
   const cardId = cardElement.getCardId();
-  const likeCheck = cardElement.likeCheck(); // Get the current like state
+  const checkLike = cardElement.checkLike(); // Get the current like state
 
-  const apiCall = likeCheck ? api.unlikeCard(cardId) : api.likeCard(cardId);
+  const apiCall = checkLike ? api.unlikeCard(cardId) : api.likeCard(cardId);
 
   apiCall
     .then((res) => cardElement.likeCard(res.likes.length))

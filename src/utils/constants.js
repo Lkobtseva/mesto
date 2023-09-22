@@ -2,7 +2,7 @@
 export const buttonSubmitElement = document.querySelector(".popup__buttonAddCard");
 export const cardOpenButton = document.querySelector(".profile__button");
 const cardCloseButton = document.querySelector(".popup__close-icon_type_new-card");
-const inputTitleElement = document.querySelector(".popup__input_type_title");
+const inputTitleElement = document.querySelector(".popup__input_type_name");
 const inputLinkElement = document.querySelector(".popup__input_type_link");
 
 //редактировать профиль

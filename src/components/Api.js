@@ -4,7 +4,7 @@ export class Api {
         this._headers = config.headers;
     }
 
-    #Responce(res) {
+    #checkResponce(res) {
         return res.ok
             ? res.json()
             : res.json().then(errorData => Promise.reject(errorData))
@@ -15,7 +15,7 @@ export class Api {
             headers: this._headers,
             body: JSON.stringify(userData)
         })
-            .then(this.#Responce)
+            .then(this.#checkResponce)
     }
 
     editUserProfile(profileData) {
@@ -24,7 +24,7 @@ export class Api {
             headers: this._headers,
             body: JSON.stringify(profileData)
         })
-            .then(this.#Responce)
+            .then(this.#checkResponce)
     }
 
     editProfileAvatar(avatarData) {
@@ -33,14 +33,14 @@ export class Api {
             headers: this._headers,
             body: JSON.stringify(avatarData)
         })
-            .then(this.#Responce)
+            .then(this.#checkResponce)
     }
 
     getInitialCards() {
         return fetch(`${this._url}/cards`, {
             headers: this._headers,
         })
-            .then(this.#Responce)
+            .then(this.#checkResponce)
     }
 
     addNewCard(cardData) {
@@ -50,7 +50,7 @@ export class Api {
             headers: this._headers,
             body: JSON.stringify(cardData)
         })
-            .then(this.#Responce)
+            .then(this.#checkResponce)
     }
 
 
@@ -59,7 +59,7 @@ export class Api {
             method: 'DELETE',
             headers: this._headers
         })
-            .then(this.#Responce)
+            .then(this.#checkResponce)
     }
 
     likeCard(cardId) {
@@ -67,7 +67,7 @@ export class Api {
             method: 'PUT',
             headers: this._headers
         })
-            .then(this.#Responce)
+            .then(this.#checkResponce)
     }
 
     unlikeCard(cardId) {
@@ -75,6 +75,6 @@ export class Api {
             method: 'DELETE',
             headers: this._headers
         })
-            .then(this.#Responce)
+            .then(this.#checkResponce)
     }
 }
