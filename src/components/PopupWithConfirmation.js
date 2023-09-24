@@ -6,15 +6,16 @@ export default class PopupWithConfirmation extends Popup {
         this._popupForm = this._popup.querySelector('.popup__form');
         this._popupFormButton = this._popupForm.querySelector('.popup__button');
         this._hhandleSubmitForm = handleSubmitForm;
+        this._submitBtnText = this._popupFormButton.textContent
     }
-
-    loading(isLoading) {
+    
+    renderLoading(isLoading, loadingText='Удаление...') {
         if (isLoading) {
-            this._popupFormButton.textContent = 'Удаление...';
+          this._popupFormButton.textContent = loadingText;
         } else {
-            this._popupFormButton.textContent = 'Да';
+          this._popupFormButton.textContent = this._submitBtnText;
         }
-    }
+      } 
 
     submit(sub) {
         this._handleSubmitForm = sub;
